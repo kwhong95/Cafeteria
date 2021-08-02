@@ -1,7 +1,6 @@
 import React from 'react'
 import {
-  Container,
-  MapSvg
+  Container
 } from './elements'
 import MapSVG from './MapSVG'
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
+import CustomApolloProvider from "./graphql";
 
 /* pages  */
 import Home from './pages/Home'
@@ -12,8 +13,10 @@ function App () {
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route path='/' exact component={Home}/>
-        <Route exact path='/gallery' component={Gallery} />
+        <CustomApolloProvider>
+          <Route path='/' exact component={Home}/>
+          <Route exact path='/gallery' component={Gallery} />
+        </CustomApolloProvider>
       </Switch>
     </BrowserRouter>
   );

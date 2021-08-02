@@ -7,7 +7,7 @@ type ContextRouteProps = {
   Component: any;
 }
 
-const ConextRoute = ( props: ContextRouteProps ) => {
+const ContextRoute = ( props: ContextRouteProps ) => {
   const { Provider, Component } = props
 
   return (
@@ -19,4 +19,4 @@ const ConextRoute = ( props: ContextRouteProps ) => {
   )
 }
 
-export default ConextRoute
+export default ContextRoute

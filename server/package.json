@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js"
   },
-  "author": "",
+  "author": "kwhong95",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.12"
