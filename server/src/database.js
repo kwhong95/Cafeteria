@@ -1,7 +1,7 @@
 const csvToJson = require("convert-csv-to-json")
 
 const database = {
-	cafe: []
+	cafeInfo: [],
 }
 
 Object.keys(database).forEach((key) => {

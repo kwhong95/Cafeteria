@@ -3,9 +3,9 @@ const { ApolloServer, gql } = require('apollo-server')
 
 const typeDefs = gql`
 	type Query {
-		cafe: [Cafe]
+		cafeInfo: [CafeInfo]
 	}
-	type Cafe {
+	type CafeInfo {
 		id: Int
 		name: String
 		region: String
@@ -16,7 +16,7 @@ const typeDefs = gql`
 
 const resolvers = {
 	Query: {
-		cafe: () => database.cafe
+		cafeInfo: () => database.cafeInfo,
 	}
 }
 
