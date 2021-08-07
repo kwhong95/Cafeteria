@@ -108,9 +108,29 @@ export const BtnSolid = styled.input`
   }
 `
 
+export const SocialText = styled.p`
+  padding: 0.7rem 0;
+  font-size: 1rem;
+`
+
 export const SocialMedia = styled.div`
   display: flex;
   justify-content: center;
+`
+
+export const SocialIcon = styled.a`
+  height: 46px;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.45rem;
+  color: #333;
+  border-radius: 50%;
+  border: 1px solid #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: 0.3s;
 `
 
 export const PanelsContainer = styled.div`
@@ -121,4 +141,58 @@ export const PanelsContainer = styled.div`
   left: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  
+  image {
+    width: 100%;
+    
+  }
+`
+
+export const LeftPanel = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  text-align: center;
+  z-index: 6;
+  pointer-events: all;
+  padding: 3rem 17% 2rem 12%;
+`
+
+export const Content = styled.div`
+  color: #7D6E64;
+  transition: transform 0.9s ease-in-out;
+  transition-delay: 0.6s;
+  
+  button {
+    margin: 0;
+    background: none;
+    border: 2px solid #fff;
+    width: 130px;
+    height: 41px;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+`
+
+export const PanelBigText = styled.h3`
+  font-weight: 600;
+  line-height: 1;
+  font-size: 1.5rem;
+`
+
+export const PanelSmallText = styled.p`
+  font-size: 0.95rem;
+  padding: 0.7rem 0;
+`
+
+export const RightPanel = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  text-align: center;
+  z-index: 6;
+  pointer-events: none;
+  padding: 3rem 12% 2rem 17%;
 `

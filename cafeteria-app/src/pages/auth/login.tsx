@@ -12,6 +12,20 @@ const Container = styled.div`
   background-color: #fff;
   min-height: 100vh;
   overflow: hidden;
+  
+  :before {
+    content: "";
+    position: absolute;
+    height: 2000px;
+    width: 2000px;
+    top: -10%;
+    right: 48%;
+    transform: translateY(-50%);
+    background-image: linear-gradient(-45deg, #FDDFCA 0%, #FCB37E 100%);
+    transition: 1.8s ease-in-out;
+    border-radius: 50%;
+    z-index: 6;
+  }
 `
 
 const LoginPage: React.FunctionComponent<IPageProps> = props => {
@@ -19,47 +33,6 @@ const LoginPage: React.FunctionComponent<IPageProps> = props => {
     <Container>
       <AuthBox />
     </Container>
-        // <Form
-        //   name="Login Form"
-        //   onFinish={() => {}}
-        // >
-        //   <Form.Item
-        //     label="이메일"
-        //     name="Email"
-        //     rules={[{
-        //       required: true,
-        //       type: 'email',
-        //       message: '이메일을 입력하세요.'
-        //     }]}
-        //   >
-        //     <Input
-        //       prefix={<UserOutlined />}
-        //     />
-        //   </Form.Item>
-        //   <Form.Item
-        //     label="비밀번호"
-        //     name="Password"
-        //     rules={[{
-        //       required: true,
-        //       message: '비밀번호를 입력하세요.'
-        //     }]}
-        //   >
-        //     <Input.Password
-        //       prefix={<LockOutlined />}
-        //     />
-        //   </Form.Item>
-        //
-        //   <Form.Item>
-        //     <Button type="primary" htmlType="submit">
-        //       로그인
-        //     </Button>
-        //     <Link to="/resister">
-        //       <Button type="primary">
-        //         가입하기
-        //       </Button>
-        //     </Link>
-        //   </Form.Item>
-        // </Form>
   )
 }
 
