@@ -1,27 +1,51 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   FormsContainer,
   LoginAndResister,
-  Form,
+  LoginForm,
+  ResisterForm,
   PanelsContainer,
+  Title,
+  InputField,
+  BtnSolid,
+  SocialMedia
 } from './elements'
-import {
-  IconLookup,
-  IconDefinition,
-  findIconDefinition
-} from "@fortawesome/fontawesome-svg-core";
-
-const userIcon: IconLookup = { prefix: 'fas', iconName: 'user' }
-const userIconDefinition: IconDefinition = findIconDefinition(userIcon)
-
-const lockIcon: IconLookup = { prefix: 'fas', iconName: 'lock' }
-const lockIconDefinition: IconDefinition = findIconDefinition(lockIcon)
 
 const AuthBox: React.FunctionComponent = () => {
   return (
     <FormsContainer>
       <LoginAndResister>
+        <LoginForm id="login-form">
+          <Title>로그인</Title>
+          <InputField>
+            <i className="fas fa-user" />
+            <input type="text" placeholder="Email" />
+          </InputField>
+          <InputField>
+            <i className="fas fa-lock"></i>
+            <input type="password" placeholder="Password" />
+          </InputField>
+          <BtnSolid type="submit" value="로그인" />
+          <SocialMedia>
+
+          </SocialMedia>
+        </LoginForm>
+
+        <ResisterForm id="resister-form">
+          <Title>가입하기</Title>
+
+          <InputField>
+
+          </InputField>
+          <InputField>
+
+          </InputField>
+          <InputField>
+
+          </InputField>
+        </ResisterForm>
+
+
 
       </LoginAndResister>
 
