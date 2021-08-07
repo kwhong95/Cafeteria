@@ -16,6 +16,7 @@ import {
   Content,
   PanelBigText,
   PanelSmallText,
+  AnimationImg
 } from './elements'
 
 const AuthBox: React.FunctionComponent = () => {
@@ -76,23 +77,29 @@ const AuthBox: React.FunctionComponent = () => {
         <LeftPanel>
           <Content>
             <PanelBigText>처음 방문하셨나요?</PanelBigText>
-            <PanelSmallText>환영합니다! 전국 개인카페들을 응원하는 카페테리아입니다.</PanelSmallText>
-            <button className="btn transparent" id="sign-up-btn">
-              Sign up
+            <PanelSmallText>전국 개인카페들을 응원하는 카페테리아입니다.</PanelSmallText>
+            <button>
+              가입하기
             </button>
           </Content>
-          <img
+          <AnimationImg
             src='/form.svg'
             alt=""
-            style={{
-              width: '100%',
-              transition: 'transform 1.1s ease-in-out',
-              transitionDelay: '0.4s'
-          }}/>
+          />
         </LeftPanel>
 
         <RightPanel>
-
+          <Content>
+            <PanelBigText>환영합니다!</PanelBigText>
+            <PanelSmallText>ssss</PanelSmallText>
+            <button>
+              로그인
+            </button>
+          </Content>
+          <AnimationImg
+            src='/form2.svg'
+            alt=""
+          />
         </RightPanel>
       </PanelsContainer>
 

@@ -175,6 +175,12 @@ export const Content = styled.div`
   }
 `
 
+export const AnimationImg = styled.img`
+  width: 100%;
+  transition: transform 1.1s ease-in-out;
+  transition-delay: 0.4s;
+`
+
 export const PanelBigText = styled.h3`
   font-weight: 600;
   line-height: 1;
