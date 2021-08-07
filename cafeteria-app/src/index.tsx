@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './antd-customize.less';
+// import './antd-customize.less';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import {BrowserRouter} from "react-router-dom";
 
