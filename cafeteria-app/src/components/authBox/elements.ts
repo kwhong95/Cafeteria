@@ -1,4 +1,5 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
+import { Link } from 'react-router-dom'
 
 interface ModeChangeProps {
   mode: boolean;
@@ -184,7 +185,7 @@ export const SocialMedia = styled.div`
   justify-content: center;
 `
 
-export const SocialIcon = styled.a`
+export const SocialIcon = styled.button`
   height: 46px;
   width: 46px;
   display: flex;

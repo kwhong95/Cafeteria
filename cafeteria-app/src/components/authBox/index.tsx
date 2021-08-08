@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase";
-import { auth } from "../../config/firebase";
+import { auth, Providers } from "../../config/firebase";
 import logging from "../../config/logging";
+import { SignWithSocialMedia } from "./module";
+import ErrorText from "../ErrorText";
 import {
   Container,
   FormsContainer,
@@ -22,7 +24,8 @@ import {
   PanelBigText,
   PanelSmallText,
   AnimationImg
-} from './elements'
+} from './elements';
+
 
 
 interface IUser {
@@ -36,12 +39,12 @@ const AuthBox: React.FunctionComponent= () => {
   const [authenticating, setAuthenticating] = useState<boolean>(false);
   const [email, setEmail] = useState<IUser>({ login: '', resister: '' });
   const [password, setPassword] = useState<IUser>({ login: '', resister: '' });
-  const [error, setError] = useState<IUser | any>({ login: '', resister: '' });
+  const [error, setError] = useState<IUser>({ login: '', resister: '' });
 
   const history = useHistory();
 
   const loginWithEmailAndPassword = () => {
-    if ( error.login !== '' ) setError({ login: '' })
+    if ( error.login !== '' ) setError({ login: '', resister: '' })
 
     setAuthenticating(true);
 
@@ -53,22 +56,34 @@ const AuthBox: React.FunctionComponent= () => {
     .catch(error => {
       logging.error(error)
       setAuthenticating(false)
-      setError(error.essage)
+      setError({ login: error.login, resister: '' })
+      return ErrorText({ error: error.login })
     })
   }
 
   const signInWithSocialMedia = (provider: firebase.auth.AuthProvider) => {
-    if (error.login !== '') setError({ login: '' })
+    if (error.login !== '') setError({ login: '', resister: '' })
 
     setAuthenticating(true)
 
-
+    SignWithSocialMedia(provider)
+    .then(result => {
+      logging.info(result)
+      history.push('/')
+    })
+    .catch(error => {
+      logging.error(error)
+      setAuthenticating(false)
+      setError({ login: error.login, resister: '' })
+      return ErrorText({ error: error.login })
+    });
   }
 
   const changeModeHandler = () => {
     setResisterMode(prev => !prev)
   }
 
+  // @ts-ignore
   return (
     <Container mode={resisterMode}>
       <FormsContainer mode={resisterMode}>
@@ -77,19 +92,38 @@ const AuthBox: React.FunctionComponent= () => {
             <Title>로그인</Title>
             <InputField>
               <i className="fas fa-user" />
-              <input type="text" placeholder="Email" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={event => setEmail({ login: event.target.value, resister: '' })}
+                value={email.login}
+              />
             </InputField>
             <InputField>
               <i className="fas fa-lock" />
-              <input type="password" placeholder="Password" />
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={event => setPassword({ login: event.target.value, resister: ''})}
+                value={password.login}
+              />
             </InputField>
-            <BtnSolid type="submit" value="로그인" />
+            <BtnSolid
+              disabled={authenticating}
+              type="submit"
+              value="로그인"
+              onClick={() => loginWithEmailAndPassword()}
+            />
             <SocialText>다른 로그인 방식을 원하시나요?</SocialText>
             <SocialMedia>
-              <SocialIcon>
+              <SocialIcon onClick={() =>{}}>
                 <i className="fab fa-facebook-f" />
               </SocialIcon>
-              <SocialIcon>
+              <SocialIcon onClick={() => signInWithSocialMedia(Providers.google)}>
                 <i className="fab fa-google" />
               </SocialIcon>
             </SocialMedia>

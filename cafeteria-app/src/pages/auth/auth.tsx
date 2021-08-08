@@ -4,7 +4,7 @@ import AuthBox from "../../components/authBox";
 
 
 
-const LoginPage: React.FunctionComponent<IPageProps> = props => {
+const AuthPage: React.FunctionComponent<IPageProps> = props => {
 
 
   return (
@@ -14,4 +14,4 @@ const LoginPage: React.FunctionComponent<IPageProps> = props => {
   )
 }
 
-export default LoginPage;
+export default AuthPage;
