@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import IPageProps from "../interfaces/page";
 import styled from "@emotion/styled";
 import Header from "../components/Header";
+import Map from "../components/Map";
+
+export interface CoordsType {
+  lat: number;
+  lng: number;
+}
 
 const HomePage: React.FunctionComponent<IPageProps> = props => {
-
+  const [coords, setCoords] = useState<CoordsType>({ lat: 0, lng: 0 });
 
   return (
     <Container>
@@ -12,9 +18,9 @@ const HomePage: React.FunctionComponent<IPageProps> = props => {
       <Interface>
         interface
       </Interface>
-      <MapContainer>
-        map
-      </MapContainer>
+      <Map
+        coords={coords}
+      />
     </Container>
   )
 }
@@ -31,8 +37,4 @@ const Container = styled.div`
 
 const Interface = styled.div`
   
-`
-
-const MapContainer = styled.div`
-  grid-column: 2 / 5;
 `
