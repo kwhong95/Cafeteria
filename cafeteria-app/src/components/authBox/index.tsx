@@ -1,4 +1,8 @@
-import React, {ComponentProps, useEffect, useRef, useState} from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import firebase from "firebase";
+import { auth } from "../../config/firebase";
+import logging from "../../config/logging";
 import {
   Container,
   FormsContainer,
@@ -21,9 +25,45 @@ import {
 } from './elements'
 
 
+interface IUser {
+  login: string;
+  resister: string;
+}
+
+
 const AuthBox: React.FunctionComponent= () => {
   const [resisterMode, setResisterMode] = useState<boolean>(false);
+  const [authenticating, setAuthenticating] = useState<boolean>(false);
+  const [email, setEmail] = useState<IUser>({ login: '', resister: '' });
+  const [password, setPassword] = useState<IUser>({ login: '', resister: '' });
+  const [error, setError] = useState<IUser | any>({ login: '', resister: '' });
 
+  const history = useHistory();
+
+  const loginWithEmailAndPassword = () => {
+    if ( error.login !== '' ) setError({ login: '' })
+
+    setAuthenticating(true);
+
+    auth.signInWithEmailAndPassword(email.login, password.login)
+    .then(result => {
+      logging.info(result)
+      history.push('/')
+    })
+    .catch(error => {
+      logging.error(error)
+      setAuthenticating(false)
+      setError(error.essage)
+    })
+  }
+
+  const signInWithSocialMedia = (provider: firebase.auth.AuthProvider) => {
+    if (error.login !== '') setError({ login: '' })
+
+    setAuthenticating(true)
+
+
+  }
 
   const changeModeHandler = () => {
     setResisterMode(prev => !prev)
