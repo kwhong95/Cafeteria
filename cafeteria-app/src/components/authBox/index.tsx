@@ -36,14 +36,16 @@ interface IUser {
 
 const AuthBox: React.FunctionComponent= () => {
   const [resisterMode, setResisterMode] = useState<boolean>(false);
+  const [registering, setRegistering] = useState<boolean>(false)
   const [authenticating, setAuthenticating] = useState<boolean>(false);
   const [email, setEmail] = useState<IUser>({ login: '', resister: '' });
   const [password, setPassword] = useState<IUser>({ login: '', resister: '' });
   const [error, setError] = useState<IUser>({ login: '', resister: '' });
+  const [confirm, setConfirm] = useState<string>('');
 
   const history = useHistory();
 
-  const loginWithEmailAndPassword = () => {
+  const signInWithEmailAndPassword = () => {
     if ( error.login !== '' ) setError({ login: '', resister: '' })
 
     setAuthenticating(true);
@@ -79,11 +81,48 @@ const AuthBox: React.FunctionComponent= () => {
     });
   }
 
+  const signUpWidthEmailAndPassword = () => {
+    if (password.resister !== confirm)
+    {
+      setError({ resister: '암호가 일치하는지 확인하세요.', login: '' });
+      return ErrorText({ error: error.resister });
+    }
+
+    if (error.resister !== '') setError({ resister: '', login: '' })
+
+    setRegistering(true);
+
+    auth.createUserWithEmailAndPassword(email.resister, password.resister)
+    .then(result => {
+      logging.info(result)
+      history.push('/auth')
+    })
+    .catch(error => {
+      logging.error(error);
+
+      if (error.code.includes('auth/weak-password'))
+      {
+        setError({ resister: '더 강력한 비밀번호를 입력하세요.', login: '' });
+        return ErrorText({ error: error.resister })
+      }
+      else if (error.code.includes('auth/email-already-in-use'))
+      {
+        setError({ resister: '이미 사용중인 이메일입니다.', login: '' });
+        return ErrorText({ error: error.resister });
+      }
+      else
+      {
+        setError({ resister: '등록할 수 없습니다. 다음에 다시 시도하세요.', login: '' });
+      }
+
+      setRegistering(false);
+    })
+  }
+
   const changeModeHandler = () => {
     setResisterMode(prev => !prev)
   }
 
-  // @ts-ignore
   return (
     <Container mode={resisterMode}>
       <FormsContainer mode={resisterMode}>
@@ -116,7 +155,7 @@ const AuthBox: React.FunctionComponent= () => {
               disabled={authenticating}
               type="submit"
               value="로그인"
-              onClick={() => loginWithEmailAndPassword()}
+              onClick={() => signInWithEmailAndPassword()}
             />
             <SocialText>다른 로그인 방식을 원하시나요?</SocialText>
             <SocialMedia>
@@ -133,18 +172,40 @@ const AuthBox: React.FunctionComponent= () => {
             <Title>가입하기</Title>
 
             <InputField>
-              <i className="fas fa-user" />
-              <input type="text" placeholder="Username"/>
-            </InputField>
-            <InputField>
               <i className="fas fa-envelope" />
-              <input type="email" placeholder="Email"/>
+              <input
+                type="email"
+                placeholder="Email"
+                onChange={event => setEmail({ resister: event.target.value, login: '' })}
+                value={email.resister}
+              />
             </InputField>
             <InputField>
               <i className="fas fa-lock" />
-              <input type="password" placeholder="Password"/>
+              <input
+                autoComplete="new-password"
+                type="password"
+                placeholder="Password"
+                onChange={event => setPassword({ resister: event.target.value, login: '' })}
+                value={password.resister}
+              />
             </InputField>
-            <BtnSolid type="submit" value="가입하기" />
+            <InputField>
+              <i className="fas fa-lock" />
+              <input
+                autoComplete="new-password"
+                type="password"
+                placeholder="Confirm Password"
+                onChange={event => setConfirm(event.target.value)}
+                value={confirm}
+              />
+            </InputField>
+            <BtnSolid
+              disabled={registering}
+              type="submit"
+              value="가입하기"
+              onClick={() => signUpWidthEmailAndPassword()}
+            />
             <SocialText>다른 가입 방식을 원하시나요?</SocialText>
             <SocialMedia>
               <SocialIcon>
