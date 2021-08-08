@@ -6,8 +6,10 @@ import {
 } from './elements';
 
 interface MapProps {
-  coords: CoordsType
+  coords: any
 }
+
+type mapKey = string | any
 
 const Map: React.FunctionComponent<MapProps> = ({ coords }) => {
 
@@ -15,8 +17,14 @@ const Map: React.FunctionComponent<MapProps> = ({ coords }) => {
   return (
     <Container>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: typeof process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
-      />
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY } as mapKey }
+        defaultCenter={coords}
+        center={coords}
+        defaultZoom={14}
+        margin={[50, 50, 50, 50]}
+
+      >
+      </GoogleMapReact>
     </Container>
   )
 }

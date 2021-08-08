@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import IPageProps from "../interfaces/page";
 import styled from "@emotion/styled";
 import Header from "../components/Header";
@@ -10,7 +10,13 @@ export interface CoordsType {
 }
 
 const HomePage: React.FunctionComponent<IPageProps> = props => {
-  const [coords, setCoords] = useState<CoordsType>({ lat: 0, lng: 0 });
+  const [coords, setCoords] = useState({});
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+      setCoords({ lat: latitude, lng: longitude });
+    });
+  }, []);
 
   return (
     <Container>
