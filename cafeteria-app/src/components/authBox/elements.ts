@@ -41,6 +41,15 @@ export const Container = styled.div<ModeChangeProps>`
       transition: 2s ease-in-out;
     }
   }
+  
+  @media (max-width: 570px) {
+    padding: 1.5rem;
+    
+    :before {
+      bottom: ${props => props.mode ?  '28%' : '72%'};
+      left: 50%;
+    }
+  }
 `
 
 export const FormsContainer = styled.div<ModeChangeProps>`
@@ -49,7 +58,6 @@ export const FormsContainer = styled.div<ModeChangeProps>`
   height: 100%;
   top: 0;
   left: 0;
-  
 `
 
 export const LoginAndResister = styled.div<ModeChangeProps>`
@@ -84,6 +92,10 @@ export const LoginForm = styled.form<ModeChangeProps>`
   grid-row: 1 / 2;
   z-index: ${props => props.mode ? '1' : '2'};
   opacity: ${props => props.mode ? '0' : '1'};
+  
+  @media (max-width: 570px) {
+    padding: 0 1.5rem;
+  }
 `
 
 export const ResisterForm = styled.form<ModeChangeProps>`
@@ -257,6 +269,10 @@ export const Content = styled.div`
       font-size: 0.7rem;
     }
   }
+  
+  @media (max-width: 570px) {
+    padding: .5rem 1rem;
+  }
 `
 
 export const AnimationImg = styled.img`
@@ -268,6 +284,10 @@ export const AnimationImg = styled.img`
     width: 200px;
     transition: transform 0.9s ease-in-out;
     transition-delay: 0.6s;
+  }
+  
+  @media (max-width: 570px) {
+    display: none;
   }
 `
 
