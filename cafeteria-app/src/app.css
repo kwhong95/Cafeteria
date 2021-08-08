@@ -8,6 +8,12 @@
 }
 
 body,
+html {
+    background-color: #6F4E37;
+    height: 100vh;
+}
+
+body,
 input {
     font-family: "Poppins", sans-serif;
 }
