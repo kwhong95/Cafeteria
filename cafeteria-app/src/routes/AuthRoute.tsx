@@ -9,7 +9,7 @@ const AuthRoute = (
   if(!auth.currentUser)
   {
     logging.warn('유저 정보가 없습니다. 페이지 이동중..')
-    return <Redirect to='/login' />
+    return <Redirect to='/auth' />
   }
 
   return <div>{children}</div>

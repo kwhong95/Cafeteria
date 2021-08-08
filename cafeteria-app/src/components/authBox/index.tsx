@@ -25,6 +25,7 @@ import {
   PanelSmallText,
   AnimationImg
 } from './elements';
+import { message } from "antd";
 
 
 
@@ -40,13 +41,13 @@ const AuthBox: React.FunctionComponent= () => {
   const [authenticating, setAuthenticating] = useState<boolean>(false);
   const [email, setEmail] = useState<IUser>({ login: '', resister: '' });
   const [password, setPassword] = useState<IUser>({ login: '', resister: '' });
-  const [error, setError] = useState<IUser>({ login: '', resister: '' });
+  const [error, setError] = useState<string>('');
   const [confirm, setConfirm] = useState<string>('');
 
   const history = useHistory();
 
   const signInWithEmailAndPassword = () => {
-    if ( error.login !== '' ) setError({ login: '', resister: '' })
+    if ( error !== '' ) setError('')
 
     setAuthenticating(true);
 
@@ -58,13 +59,13 @@ const AuthBox: React.FunctionComponent= () => {
     .catch(error => {
       logging.error(error)
       setAuthenticating(false)
-      setError({ login: error.login, resister: '' })
-      return ErrorText({ error: error.login })
+      setError(error)
+      return message.error(error.message)
     })
   }
 
   const signInWithSocialMedia = (provider: firebase.auth.AuthProvider) => {
-    if (error.login !== '') setError({ login: '', resister: '' })
+    if (error!== '') setError('')
 
     setAuthenticating(true)
 
@@ -76,19 +77,19 @@ const AuthBox: React.FunctionComponent= () => {
     .catch(error => {
       logging.error(error)
       setAuthenticating(false)
-      setError({ login: error.login, resister: '' })
-      return ErrorText({ error: error.login })
+      setError('')
+      return message.error(error.message);
     });
   }
 
   const signUpWidthEmailAndPassword = () => {
     if (password.resister !== confirm)
     {
-      setError({ resister: '암호가 일치하는지 확인하세요.', login: '' });
-      return ErrorText({ error: error.resister });
+      setError('암호가 일치하는지 확인하세요.');
+      return message.error(error)
     }
 
-    if (error.resister !== '') setError({ resister: '', login: '' })
+    if (error !== '') setError('');
 
     setRegistering(true);
 
@@ -102,17 +103,17 @@ const AuthBox: React.FunctionComponent= () => {
 
       if (error.code.includes('auth/weak-password'))
       {
-        setError({ resister: '더 강력한 비밀번호를 입력하세요.', login: '' });
-        return ErrorText({ error: error.resister })
+        setError('더 강력한 비밀번호를 입력하세요');
+        return message.error(error.message)
       }
       else if (error.code.includes('auth/email-already-in-use'))
       {
-        setError({ resister: '이미 사용중인 이메일입니다.', login: '' });
-        return ErrorText({ error: error.resister });
+        setError('이미 사용중인 이메일입니다.');
+        return message.error(error.message)
       }
       else
       {
-        setError({ resister: '등록할 수 없습니다. 다음에 다시 시도하세요.', login: '' });
+        setError('등록할 수 없습니다. 다음에 다시 시도하세요.');
       }
 
       setRegistering(false);
