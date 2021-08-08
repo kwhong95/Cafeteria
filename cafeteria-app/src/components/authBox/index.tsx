@@ -41,13 +41,14 @@ const AuthBox: React.FunctionComponent= () => {
   const [authenticating, setAuthenticating] = useState<boolean>(false);
   const [email, setEmail] = useState<IUser>({ login: '', resister: '' });
   const [password, setPassword] = useState<IUser>({ login: '', resister: '' });
-  const [error, setError] = useState<string>('');
   const [confirm, setConfirm] = useState<string>('');
+
+  let error = ""
 
   const history = useHistory();
 
   const signInWithEmailAndPassword = () => {
-    if ( error !== '' ) setError('')
+    if ( error !== '' ) return message.error('')
 
     setAuthenticating(true);
 
@@ -59,13 +60,12 @@ const AuthBox: React.FunctionComponent= () => {
     .catch(error => {
       logging.error(error)
       setAuthenticating(false)
-      setError(error)
-      return message.error(error.message)
+      return message.error('로그인에 실패했습니다.')
     })
   }
 
   const signInWithSocialMedia = (provider: firebase.auth.AuthProvider) => {
-    if (error!== '') setError('')
+    if (error!== '') return message.error('')
 
     setAuthenticating(true)
 
@@ -77,19 +77,17 @@ const AuthBox: React.FunctionComponent= () => {
     .catch(error => {
       logging.error(error)
       setAuthenticating(false)
-      setError('')
-      return message.error(error.message);
+      return message.error('');
     });
   }
 
   const signUpWidthEmailAndPassword = () => {
     if (password.resister !== confirm)
     {
-      setError('암호가 일치하는지 확인하세요.');
-      return message.error(error)
+      return message.error('암호가 일치하는지 확인하세요.')
     }
 
-    if (error !== '') setError('');
+    if (error !== '') return message.error('');
 
     setRegistering(true);
 
@@ -103,17 +101,19 @@ const AuthBox: React.FunctionComponent= () => {
 
       if (error.code.includes('auth/weak-password'))
       {
-        setError('더 강력한 비밀번호를 입력하세요');
-        return message.error(error.message)
+        return message.error('더 강력한 비밀번호를 입력하세요');
       }
       else if (error.code.includes('auth/email-already-in-use'))
       {
-        setError('이미 사용중인 이메일입니다.');
-        return message.error(error.message)
+        return message.error('이미 사용중인 이메일입니다.');
+      }
+      else if (error.code.includes('auth/auth/invalid-email'))
+      {
+        return message.error('잘못된 이메일 주소입니다.')
       }
       else
       {
-        setError('등록할 수 없습니다. 다음에 다시 시도하세요.');
+        return message.error('잘못된 정보입니다. 다음에 시도해주세요.')
       }
 
       setRegistering(false);
