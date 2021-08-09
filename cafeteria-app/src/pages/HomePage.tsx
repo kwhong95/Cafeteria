@@ -3,11 +3,7 @@ import IPageProps from "../interfaces/page";
 import styled from "@emotion/styled";
 import Header from "../components/Header";
 import Map from "../components/Map";
-
-export interface CoordsType {
-  lat: number;
-  lng: number;
-}
+import Interface from "../components/Interface";
 
 const HomePage: React.FunctionComponent<IPageProps> = props => {
   const [coords, setCoords] = useState({});
@@ -40,7 +36,3 @@ const Container = styled.div`
   height: 100vh;
 `
 
-
-const Interface = styled.div`
-  
-`

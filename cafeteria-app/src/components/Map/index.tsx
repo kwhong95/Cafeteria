@@ -1,6 +1,5 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
-import { CoordsType } from "../../pages/HomePage";
 import {
   Container
 } from './elements';

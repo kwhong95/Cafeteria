@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './app.css'
+import './app.css';
+import './antd-customize.less'
 import { auth } from "./config/firebase";
 import logging from "./config/logging";
 import {Switch, Route, RouteComponentProps} from "react-router-dom";
