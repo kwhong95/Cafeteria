@@ -2,6 +2,7 @@ import React from "react";
 import GoogleMapReact from 'google-map-react';
 import {
   Container
+
 } from './elements';
 
 interface MapProps {
