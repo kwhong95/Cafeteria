@@ -13,7 +13,6 @@ type mapKey = string | any
 
 const Map: React.FunctionComponent<MapProps> = ({ coords }) => {
 
-
   return (
     <Container>
       <GoogleMapReact
