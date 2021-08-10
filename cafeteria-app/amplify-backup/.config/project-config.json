@@ -1,0 +1,17 @@
+{
+  "projectName": "cafeteriaapp",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "build",
+      "BuildCommand": "craco build",
+      "StartCommand": "craco start"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}
