@@ -10,6 +10,11 @@
       "StackName": "amplify-cafeteriaapp-dev-150506",
       "StackId": "arn:aws:cloudformation:ap-northeast-2:909559241449:stack/amplify-cafeteriaapp-dev-150506/e94c7e00-f9a0-11eb-9d69-0a0f6294dd7c",
       "AmplifyAppId": "d1eu10ttsrgxbf"
+    },
+    "categories": {
+      "auth": {
+        "cafeteriaapp154360cf": {}
+      }
     }
   }
 }

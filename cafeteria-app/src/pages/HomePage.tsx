@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import Header from "../components/Header";
 import Map from "../components/Map";
 import Interface from "../components/Interface";
-import { API, Amplify } from 'aws-amplify';
+import { API, Amplify, Storage } from 'aws-amplify';
 import { listTodos } from "../graphql/queries";
 import awsmobile from '../aws-exports'
 
@@ -27,7 +27,8 @@ const HomePage: React.FunctionComponent<IPageProps> = props => {
 
   const fetchNotes = async () => {
     const apiData: any = await API.graphql({ query: listTodos } as any);
-    setTodos(apiData.data.listNotes.items) ;
+    const notesFromAPI = apiData.data.listTodos.items;
+
   }
 
   useEffect(() => {
